@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TodaytaskActivity">
+    <!--    mz1Bey6KjsQ-->
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/ttTopLabel"
+            android:textSize="20dp"
+            android:layout_marginStart="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <com.google.android.youtube.player.YouTubePlayerView
+            android:id="@+id/youtubeplayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/ttTodayQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="4dp"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/taskCheckboxLayout"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+
+            <TextView
+                android:id="@+id/checkboxLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="Please check on task completion"
+                android:textSize="20dp"
+                android:layout_marginStart="4dp"/>
+            <CheckBox
+                android:id="@+id/cbComplete"
+                android:layout_width="50dp"
+                android:textSize="28dp"
+                android:layout_height="28dp"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                android:gravity="end"
+                tools:ignore="MissingConstraints" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/scoreLayout"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="Rate this from 1 to 10"
+                android:textSize="20dp"
+                android:layout_marginStart="4dp"/>
+            <NumberPicker
+                android:id="@+id/npScore"
+                android:layout_width="wrap_content"
+                android:textSize="24dp"
+                android:layout_height="120dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:gravity="end" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+        <EditText
+            android:id="@+id/ttDailyQnAns"
+            android:layout_width="match_parent"
+            android:layout_height="154dp"
+            android:ems="10"
+            android:textSize="14dp"
+            android:hint="Tell about your day"
+            android:gravity="start|top"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/text_area_bg"
+            android:inputType="textMultiLine" />
+
+        <Button
+            android:id="@+id/btnComplete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Complete"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

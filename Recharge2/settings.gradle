@@ -1,0 +1,2 @@
+rootProject.name = "Recharge"
+include ':app'
