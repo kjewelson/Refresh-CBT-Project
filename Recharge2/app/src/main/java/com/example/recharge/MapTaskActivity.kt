@@ -1,21 +1,21 @@
 package com.example.recharge
 
-import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.*
+import com.thecode.aestheticdialogs.*
+import kotlinx.android.synthetic.main.activity_analytics.*
 import kotlinx.android.synthetic.main.activity_map_task.*
-import java.text.DateFormat
-import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.util.*
 import kotlin.collections.ArrayList
+
 
 class MapTaskActivity : AppCompatActivity() {
 
@@ -30,12 +30,12 @@ class MapTaskActivity : AppCompatActivity() {
     var selStartDate=""
 
 
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map_task)
         val mapSubmit : Button= findViewById(R.id.btnMapAct)
-        database= FirebaseDatabase.getInstance().getReference("UserProfile")
         loadUserDD()
         loadCourseDD()
         mapSubmit.setOnClickListener(){
@@ -45,6 +45,7 @@ class MapTaskActivity : AppCompatActivity() {
     }
 
     private fun loadUserDD(){
+        database= FirebaseDatabase.getInstance().getReference("UserProfile")
         database.addValueEventListener(object :ValueEventListener{
 
         override fun onCancelled(error: DatabaseError) {
@@ -135,8 +136,8 @@ class MapTaskActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun saveUserActivity(){
         database= FirebaseDatabase.getInstance().getReference("UserTask")
-        val selmonth  = findViewById<DatePicker>(R.id.dpStartDate).month.toString()
-        val selDay = findViewById<DatePicker>(R.id.dpStartDate).dayOfMonth.toString()
+        val selmonth  = when (dpStartDate.month) { in 1..9 -> "0"+((dpStartDate.month)+1).toString() else -> ((dpStartDate.month)+1).toString()}
+        val selDay = when (dpStartDate.dayOfMonth) { in 1..9 -> "0"+(dpStartDate.dayOfMonth).toString() else -> (dpStartDate.dayOfMonth).toString()}
         val selYear = findViewById<DatePicker>(R.id.dpStartDate).year.toString()
 
         selStartDate = selYear+"-"+selmonth+"-"+selDay
@@ -145,12 +146,31 @@ class MapTaskActivity : AppCompatActivity() {
 
         Log.w("TAG", "$selUser create profile start")
         database.child(selUser).setValue(userTask).addOnSuccessListener {
-            Toast.makeText(this, "Submitting Map Task",Toast.LENGTH_SHORT).show()
-            finish()
+//            Toast.makeText(this, "Submitting Map Task",Toast.LENGTH_SHORT).show()
+
+            showDialog("Success","Tasks has been assigned to the selected user")
         }.addOnFailureListener {
             Toast.makeText(this, "Map Task Failed",Toast.LENGTH_SHORT).show()
         }
 
+    }
+
+    public fun showDialog(title: String , message:String) {
+        AestheticDialog.Builder(this, DialogStyle.FLAT, DialogType.SUCCESS)
+            .setTitle(title)
+            .setMessage(message)
+            .setCancelable(false)
+            .setDarkMode(false)
+            .setGravity(Gravity.CENTER)
+            .setAnimation(DialogAnimation.SHRINK)
+            .setOnClickListener(object : OnDialogClickListener {
+                override fun onClick(dialog: AestheticDialog.Builder) {
+                    dialog.dismiss()
+                    finish()
+                    //actions...
+                }
+            })
+            .show()
     }
 
 }

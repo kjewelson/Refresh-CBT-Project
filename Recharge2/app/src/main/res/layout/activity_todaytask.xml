@@ -4,15 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TodaytaskActivity">
+    tools:context=".TodaytaskActivity"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp">
+
+
+
     <!--    mz1Bey6KjsQ-->
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="1dp"
-        android:layout_marginEnd="10dp"
         android:layout_marginBottom="1dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,28 +24,45 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-        <TextView
-            android:id="@+id/ttTopLabel"
-            android:textSize="20dp"
-            android:layout_marginStart="4dp"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <com.google.android.youtube.player.YouTubePlayerView
-            android:id="@+id/youtubeplayer"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@android:color/darker_gray"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="50dp"
+            android:orientation="vertical"
+            android:padding="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Daily Task"
+                android:textSize="24dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
         <TextView
             android:id="@+id/ttTodayQuestion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="32sp"
             android:textStyle="bold"
-            android:layout_marginBottom="20dp"
-            android:layout_marginStart="4dp"/>
+            android:layout_marginBottom="20dp"/>
+        <com.google.android.youtube.player.YouTubePlayerView
+            android:id="@+id/youtubeplayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/taskCheckboxLayout"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent">
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp">
 
             <TextView
                 android:id="@+id/checkboxLabel"
@@ -96,22 +116,54 @@
 
 
 
-        <EditText
-            android:id="@+id/ttDailyQnAns"
-            android:layout_width="match_parent"
-            android:layout_height="154dp"
-            android:ems="10"
-            android:textSize="14dp"
-            android:hint="Tell about your day"
-            android:gravity="start|top"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/text_area_bg"
-            android:inputType="textMultiLine" />
 
-        <Button
-            android:id="@+id/btnComplete"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Complete"/>
+
     </LinearLayout>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@android:color/darker_gray"
+        app:layout_constraintBottom_toTopOf="@+id/ttDailyQnAns"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text=" How good are you doing today? "
+                android:textSize="24dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <EditText
+        android:id="@+id/ttDailyQnAns"
+        android:layout_width="match_parent"
+        android:layout_height="124dp"
+        android:ems="10"
+        android:textSize="14dp"
+        android:hint="Tell about your day"
+        app:layout_constraintBottom_toTopOf="@+id/btnComplete"
+        android:gravity="start|top"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/text_area_bg"
+        android:textColor="@color/black"
+        android:inputType="textMultiLine" />
+    <Button
+        android:id="@+id/btnComplete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintCircleRadius="5dp"
+        android:textColor="@color/white"
+        android:background="#063F59"
+        android:text="Complete"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

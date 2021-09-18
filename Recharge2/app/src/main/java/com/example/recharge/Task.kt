@@ -8,6 +8,7 @@ data class Task(
     ,val dailyFeatures4: DailyFeatures?=null
     ,val dailyFeatures5: DailyFeatures?=null
     ,val dailyFeatures6: DailyFeatures?=null
-    ,val dailyFeatures7: DailyFeatures?=null, val desc: String?=null){
+    ,val dailyFeatures7: DailyFeatures?=null, val desc: String?=null
+    ,val totalWeight:Int?=0){
 
 }

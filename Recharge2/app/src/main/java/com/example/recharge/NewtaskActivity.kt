@@ -3,6 +3,7 @@ package com.example.recharge
 import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -13,6 +14,7 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.thecode.aestheticdialogs.*
 import kotlinx.android.synthetic.main.activity_newtask.*
 
 
@@ -26,6 +28,7 @@ class NewtaskActivity : AppCompatActivity() {
     var dat5Type:String="1"
     var dat6Type:String="1"
     var dat7Type:String="1"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -162,6 +165,10 @@ class NewtaskActivity : AppCompatActivity() {
         val day5wt = (findViewById(R.id.editTNDay5wt) as EditText).text.toString()
         val day6wt = (findViewById(R.id.editTNDay6wt) as EditText).text.toString()
         val day7wt = (findViewById(R.id.editTNDay7wt) as EditText).text.toString()
+        val totalWeight=(Integer.parseInt(editTNDay1wt.text.toString())+Integer.parseInt(editTNDay2wt.text.toString())
+                        +Integer.parseInt(editTNDay3wt.text.toString())+Integer.parseInt(editTNDay4wt.text.toString())
+                        +Integer.parseInt(editTNDay5wt.text.toString())+Integer.parseInt(editTNDay6wt.text.toString())
+                        +Integer.parseInt(editTNDay7wt.text.toString()))
 
         val dailyFeatures1=DailyFeatures(day1at, day1wt,dat1Type,videoUrl_1.text.toString())
         val dailyFeatures2=DailyFeatures(day2at, day2wt,dat2Type,videoUrl_2.text.toString())
@@ -172,16 +179,35 @@ class NewtaskActivity : AppCompatActivity() {
         val dailyFeatures7=DailyFeatures(day7at, day7wt,dat7Type,videoUrl_7.text.toString())
 
         val task=Task(name,dailyFeatures1,dailyFeatures2,dailyFeatures3
-            ,dailyFeatures4,dailyFeatures5,dailyFeatures6,dailyFeatures7,desc)
+            ,dailyFeatures4,dailyFeatures5,dailyFeatures6,dailyFeatures7,desc,totalWeight)
 
         Log.w("TAG", desc)
         database.child(name).setValue(task).addOnSuccessListener {
-            Toast.makeText(this, "Submitting new Activity $name",Toast.LENGTH_SHORT).show()
-            finish()
+//            Toast.makeText(this, "Submitting new Activity $name",Toast.LENGTH_SHORT).show()
+            showDialog("SUCCESS", " Activity $name has been created ")
+//            finish()
         }.addOnFailureListener {
             Toast.makeText(this, "Failed",Toast.LENGTH_SHORT).show()
         }
 
 
+    }
+
+    public fun showDialog(title: String , message:String) {
+        AestheticDialog.Builder(this, DialogStyle.FLAT, DialogType.SUCCESS)
+            .setTitle(title)
+            .setMessage(message)
+            .setCancelable(false)
+            .setDarkMode(false)
+            .setGravity(Gravity.CENTER)
+            .setAnimation(DialogAnimation.SHRINK)
+            .setOnClickListener(object : OnDialogClickListener {
+                override fun onClick(dialog: AestheticDialog.Builder) {
+                    dialog.dismiss()
+                    finish()
+                    //actions...
+                }
+            })
+            .show()
     }
 }

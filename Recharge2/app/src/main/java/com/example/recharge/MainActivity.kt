@@ -3,6 +3,7 @@ package com.example.recharge
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -43,6 +44,13 @@ class MainActivity : AppCompatActivity() {
         FirebaseApp.initializeApp(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Hide the status bar.
+//        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+// Remember that you should never show the action bar if the // status bar is hidden, so hide that too if necessary.
+//        actionBar?.hide()
+//        actionBar?.hide()
+
         checkUser()
 //        val googleSignIn= findViewById<SignInButton>(R.id.register_google)
         val googleSignIn: Button = findViewById(R.id.register_google)
@@ -59,8 +67,9 @@ class MainActivity : AppCompatActivity() {
             .requestEmail()
             .build()
 
-        googleSignInClient=GoogleSignIn.getClient(this,gso)
 
+
+        googleSignInClient=GoogleSignIn.getClient(this,gso)
 
 
     }
@@ -68,6 +77,7 @@ class MainActivity : AppCompatActivity() {
     private fun signIn() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
